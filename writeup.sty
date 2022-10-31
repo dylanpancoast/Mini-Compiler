@@ -1,0 +1,34 @@
+\documentclass[solution, letterpaper]{cs20}
+
+\begin{document}
+    \noindent For this project, I implemented 4 extensions:
+    \begin{enumerate}
+          \item Implemented \textit{eval\_l} without stores (Figure 19.2 of textbook). Edited miniml.ml to print the output from all three evaluators on one user input along with the abstract syntax of that input.
+          \item Eliminated redundant code within evaluators (Design).
+          \item Added floating point arithmetic functionality through updates of expr.ml, evaluators, miniml\_lex.mll, and miniml\_parse.mly.
+          \item Added string concatenation functionality through updates of expr.ml, evaluators, miniml\_lex.mll, and miniml\_parse.mly.
+      \end{enumerate}
+    To illustrate those extensions, I'll share screen grabs from my implemented interpreter (items 1, 3, and 4) and screen grabs of code (item 2). Below are those images and accompanying description.
+    \begin{enumerate}
+          \item See item 3.
+          \item To eliminate redundant code I created an ADT, \textit{eval\_type} \begin{center}\includegraphics[width=4cm]{images/eval_type_ADT.png}\end{center} 
+          I then  added this ADT as an optional arg to \textit{eval\_s}. Within \textit{eval\_s}, \textit{eval\_type} is used to determine which evaluator is used on expressions found in match constructs whose effect is the same between all three evaluators.  \begin{center}\includegraphics[width=8cm]{images/eval_type_optional.png}\end{center}
+          The effect is that \textit{eval\_d} and \textit{eval\_l} have redundant code eliminated through an appropriate call to \textit{eval\_s}.
+          \begin{center}\includegraphics[width=7cm]{images/eval_type_effect.png}\qquad\includegraphics[width=7cm]{images/eval_type_effect2.png}
+          \end{center}
+          \item Below I show showcase some functionality for floating points along with where the lexical and dynamic evaluators differ:
+          \begin{center}\includegraphics[width=16cm]{images/float_arithmetic.png}
+          \end{center}
+          Lastly, here I show how my edits to miniml\_ml effect what is printed. Notice how the \textit{value} returned by evaluating a \textit{Fun} includes the expected \textit{Closure} characteristic of lexical evaluation:
+          \begin{center}\includegraphics[width=6cm]{images/miniml.png}
+          \end{center}
+          \item Below I show a few ways in which you could say hello to the world:
+          \begin{center}\includegraphics[width=7cm]{images/string_concat.png}
+          \end{center}
+      \end{enumerate}
+      As a side note, I also added division functionality for both integers and floating points as well as a greater than  binary operator. These seem less significant than the rest so I leave them here for completeness only.
+      \begin{center}
+          \includegraphics[width=5cm]{images/extra.png}
+      \end{center}
+      This project was a blast. My only regret is not spending more time on it in the beginning. You all are wonderful and I appreciate your abundance of patience and help this semester.
+\end{document}
